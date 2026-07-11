@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ShieldCheck, ArrowRight, Loader2 } from 'lucide-react'
+import { ShieldCheck, ArrowRight, Loader2, HelpCircle } from 'lucide-react'
+import Link from 'next/link'
 import { getActiveSeason, registerForLeague, type ActiveSeason } from '@/lib/api'
 import { NIGERIAN_BANKS } from '@/lib/banks'
 
@@ -123,7 +124,20 @@ export default function RegisterPage() {
                 />
               </Field>
 
-              <Field label="FPL TEAM ID">
+              <Field
+                label="FPL TEAM ID"
+                labelExtra={
+                  <Link
+                    href="/help#team-id"
+                    target="_blank"
+                    className="text-gray-500 hover:text-pitch-green transition-colors"
+                    aria-label="How do I find my FPL Team ID?"
+                    title="How do I find my FPL Team ID?"
+                  >
+                    <HelpCircle className="h-4 w-4" />
+                  </Link>
+                }
+              >
                 <input
                   type="number" name="fplEntryId" required value={formData.fplEntryId} onChange={handleChange}
                   className={inputClass} placeholder="e.g. 118126"
@@ -206,10 +220,21 @@ export default function RegisterPage() {
 const inputClass =
   'w-full bg-stadium-900 border border-stadium-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-pitch-green focus:ring-1 focus:ring-pitch-green transition-colors'
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  labelExtra,
+  children,
+}: {
+  label: string
+  labelExtra?: React.ReactNode
+  children: React.ReactNode
+}) {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-heading tracking-wide text-gray-300">{label}</label>
+      <label className="flex items-center gap-2 text-sm font-heading tracking-wide text-gray-300">
+        {label}
+        {labelExtra}
+      </label>
       {children}
     </div>
   )
