@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { CheckCircle2, XCircle, Loader2 } from 'lucide-react'
+import { CheckCircle2, XCircle, Loader2, ArrowRight } from 'lucide-react'
 import { verifyPayment } from '@/lib/api'
+
+const USER_PORTAL_URL = process.env.NEXT_PUBLIC_USER_PORTAL_URL || 'http://localhost:3051'
 
 export default function RegisterSuccessPage() {
   const params = useSearchParams()
@@ -39,9 +41,17 @@ export default function RegisterSuccessPage() {
           <h1 className="text-3xl md:text-5xl font-heading font-bold text-white mb-4">
             WELCOME TO THE <span className="text-pitch-green">LEAGUE</span>
           </h1>
-          <p className="text-gray-400 max-w-md">
-            Your spot is confirmed. Log in to your LOC dashboard to track standings and payouts.
+          <p className="text-gray-400 max-w-md mb-8">
+            Your spot is confirmed. We&apos;ve also emailed you the league join code — log in below to
+            track standings and payouts.
           </p>
+          <a
+            href={`${USER_PORTAL_URL}/login`}
+            className="flex items-center gap-2 bg-pitch-green hover:bg-white text-stadium-900 font-heading font-bold text-lg tracking-wider px-8 py-4 rounded-sm transition-colors shadow-[0_0_20px_rgba(0,200,83,0.3)]"
+          >
+            GO TO YOUR DASHBOARD
+            <ArrowRight className="h-5 w-5" />
+          </a>
         </>
       )}
       {status === 'failed' && (
