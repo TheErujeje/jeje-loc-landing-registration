@@ -27,9 +27,9 @@ export default function WinnersPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen pt-32 pb-24 bg-stadium-900 relative"
+      className="min-h-screen pt-32 pb-24 bg-white relative"
     >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-floodlight-gold/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand-purple/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
@@ -39,12 +39,12 @@ export default function WinnersPage() {
             transition={{ type: 'spring', stiffness: 200, damping: 15 }}
             className="inline-block mb-4"
           >
-            <Crown className="h-12 w-12 text-floodlight-gold drop-shadow-[0_0_15px_rgba(255,215,0,0.5)]" />
+            <Crown className="h-12 w-12 text-brand-purple" />
           </motion.div>
-          <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-4 text-glow-gold">
-            HALL OF <span className="text-floodlight-gold">FAME</span>
+          <h1 className="text-5xl md:text-7xl font-bold text-ink-900 tracking-[-0.04em] sm:tracking-[-0.05em] leading-[100%] mb-4">
+            Hall of <span className="text-brand-purple">Fame</span>
           </h1>
-          <p className="text-gray-400 text-xl font-light tracking-wide">Legends of the League</p>
+          <p className="text-ink-600 text-xl font-light">Legends of the League</p>
         </div>
 
         <motion.div
@@ -57,34 +57,34 @@ export default function WinnersPage() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className={`relative bg-stadium-800 p-8 rounded-sm overflow-hidden group transition-all duration-300 hover:-translate-y-2 ${
+              className={`relative bg-white p-8 rounded-card shadow-sm overflow-hidden group transition-all duration-300 hover:-translate-y-1 ${
                 winner.isCurrent
-                  ? 'border-2 border-floodlight-gold shadow-[0_0_30px_rgba(255,215,0,0.15)]'
-                  : 'border border-stadium-700 hover:border-floodlight-gold/50'
+                  ? 'border-2 border-brand-purple'
+                  : 'border border-hairline hover:border-brand-purple/40'
               }`}
             >
               <div className="flex justify-between items-start mb-6 relative z-10">
-                <div className="bg-stadium-900 px-3 py-1 rounded-sm border border-stadium-700">
-                  <span className="font-heading text-sm text-gray-300 tracking-wider">{winner.season}</span>
+                <div className="bg-ink-100 px-3 py-1 rounded-lg border border-hairline">
+                  <span className="text-sm text-ink-700 font-medium">{winner.season}</span>
                 </div>
                 {winner.isCurrent ? (
-                  <Star className="h-6 w-6 text-floodlight-gold fill-floodlight-gold" />
+                  <Star className="h-6 w-6 text-brand-purple fill-brand-purple" />
                 ) : (
-                  <Trophy className="h-6 w-6 text-gray-500 group-hover:text-floodlight-gold transition-colors" />
+                  <Trophy className="h-6 w-6 text-ink-400 group-hover:text-brand-purple transition-colors" />
                 )}
               </div>
 
               <div className="relative z-10">
-                <h3 className="text-2xl font-heading font-bold text-white mb-1 truncate" title={winner.name}>
+                <h3 className="text-2xl font-bold text-ink-900 tracking-[-0.03em] mb-1 truncate" title={winner.name}>
                   {winner.name}
                 </h3>
-                <p className="text-pitch-green text-sm mb-6 truncate" title={winner.team}>
+                <p className="text-brand-purple text-sm mb-6 truncate" title={winner.team}>
                   {winner.team}
                 </p>
 
-                <div className="pt-4 border-t border-stadium-700 flex justify-between items-center">
-                  <span className="text-gray-500 text-xs uppercase tracking-widest">Prize Won</span>
-                  <span className={`font-heading font-bold text-lg ${winner.isCurrent ? 'text-floodlight-gold' : 'text-white'}`}>
+                <div className="pt-4 border-t border-hairline flex justify-between items-center">
+                  <span className="label-eyebrow">Prize Won</span>
+                  <span className={`font-bold text-lg ${winner.isCurrent ? 'text-brand-purple' : 'text-ink-900'}`}>
                     {winner.prize}
                   </span>
                 </div>

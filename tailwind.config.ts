@@ -9,25 +9,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        stadium: {
-          900: '#0a0e1a',
-          800: '#0d1117',
-          700: '#1a1a2e',
+        // FPL-inspired brand accents
+        brand: {
+          blue: '#0EA5E9',
+          'blue-light': '#E0F7FF',
+          purple: '#38003C',
+          'purple-light': '#F3E8F5',
+          lilac: '#D499B9',
+          evergreen: '#053225',
         },
-        pitch: {
-          green: '#00ff87',
+        // Warm grayscale text/border scale
+        ink: {
+          100: '#FAFAFA', 200: '#F0F0F0', 300: '#E0E0E0', 400: '#BDBDBD', 500: '#8C8C8C',
+          600: '#5C5C5C', 700: '#3A3A3A', 800: '#1F1F1F', 900: '#0F0F12',
         },
-        floodlight: {
-          gold: '#ffd700',
-          orange: '#f5a623',
-        },
-        electric: {
-          cyan: '#04f5ff',
-        },
+        surface: '#FFFFFF',
+        hairline: '#ECECEC',
+        status: { success: '#16A34A', warning: '#D97706', danger: '#DC2626', pending: '#6B7280' },
       },
       fontFamily: {
-        heading: ['var(--font-oswald)', 'sans-serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
         body: ['var(--font-inter)', 'sans-serif'],
+      },
+      borderRadius: {
+        card: '14px',
       },
       animation: {
         spotlight: 'spotlight 10s ease-in-out infinite alternate',
@@ -40,8 +45,8 @@ const config: Config = {
           '100%': { transform: 'translate(-30%, -30%) scale(1.2)', opacity: '0.6' },
         },
         'glow-pulse': {
-          '0%, 100%': { opacity: '1', boxShadow: '0 0 15px 2px rgba(0, 255, 135, 0.4)' },
-          '50%': { opacity: '.8', boxShadow: '0 0 25px 5px rgba(0, 255, 135, 0.7)' },
+          '0%, 100%': { opacity: '1', boxShadow: '0 0 15px 2px rgba(212, 153, 185, 0.4)' },
+          '50%': { opacity: '.8', boxShadow: '0 0 25px 5px rgba(212, 153, 185, 0.7)' },
         },
         shimmer: {
           '0%': { backgroundPosition: '-1000px 0' },

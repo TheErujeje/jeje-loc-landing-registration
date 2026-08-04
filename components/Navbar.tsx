@@ -17,6 +17,11 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Only the homepage opens on a dark, full-bleed hero — every other page is
+  // white right under the nav, so the "transparent over dark" treatment only
+  // applies there.
+  const overDarkHero = pathname === '/' && !isScrolled
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Past Winners', path: '/winners' },
@@ -25,17 +30,19 @@ export function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-stadium-900/90 backdrop-blur-md border-b border-stadium-700/50 py-3'
-          : 'bg-transparent py-5'
+        isScrolled ? 'bg-white/90 backdrop-blur-md border-b border-hairline py-3' : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <Trophy className="h-6 w-6 text-floodlight-gold group-hover:text-pitch-green transition-colors" />
-            <span className="font-heading font-bold text-xl tracking-wider text-white group-hover:text-glow-gold transition-all">
-              JEJE&apos;S <span className="text-floodlight-gold">LEAGUE</span>
+            <Trophy className={`h-6 w-6 transition-colors ${overDarkHero ? 'text-white' : 'text-brand-lilac'}`} />
+            <span
+              className={`font-bold text-xl tracking-[-0.03em] transition-colors ${
+                overDarkHero ? 'text-white' : 'text-ink-900'
+              }`}
+            >
+              Jeje&apos;s <span className="text-brand-lilac">League</span>
             </span>
           </Link>
 
@@ -44,8 +51,8 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.path}
-                className={`font-heading tracking-wide text-sm transition-colors hover:text-pitch-green ${
-                  pathname === link.path ? 'text-pitch-green' : 'text-gray-300'
+                className={`text-base font-semibold tracking-[-0.02em] transition-colors hover:text-brand-lilac ${
+                  pathname === link.path ? 'text-brand-lilac' : overDarkHero ? 'text-white/85' : 'text-ink-600'
                 }`}
               >
                 {link.name}
@@ -53,14 +60,14 @@ export function Navbar() {
             ))}
             <Link
               href="/register"
-              className="font-heading tracking-wider bg-pitch-green text-stadium-900 px-6 py-2 rounded-sm font-bold hover:bg-white hover:text-stadium-900 transition-all animate-glow-pulse"
+              className="font-bold tracking-[-0.02em] bg-brand-lilac text-black px-6 py-2.5 rounded-3xl hover:opacity-90 transition-all"
             >
-              REGISTER NOW
+              Register Now
             </Link>
           </div>
 
           <button
-            className="md:hidden text-gray-300 hover:text-white"
+            className={`md:hidden ${overDarkHero ? 'text-white' : 'text-ink-600'} hover:text-brand-lilac`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -75,7 +82,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-stadium-800 border-b border-stadium-700 shadow-2xl"
+            className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-hairline shadow-lg"
           >
             <div className="px-4 pt-2 pb-6 space-y-4 flex flex-col">
               {navLinks.map((link) => (
@@ -83,8 +90,8 @@ export function Navbar() {
                   key={link.name}
                   href={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-heading tracking-wide text-lg py-2 border-b border-stadium-700 ${
-                    pathname === link.path ? 'text-pitch-green' : 'text-gray-300'
+                  className={`text-lg py-2 border-b border-hairline font-semibold tracking-[-0.02em] ${
+                    pathname === link.path ? 'text-brand-lilac' : 'text-ink-600'
                   }`}
                 >
                   {link.name}
@@ -93,9 +100,9 @@ export function Navbar() {
               <Link
                 href="/register"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="font-heading tracking-wider bg-pitch-green text-stadium-900 px-6 py-3 rounded-sm font-bold text-center mt-4 animate-glow-pulse"
+                className="font-bold tracking-[-0.02em] bg-brand-lilac text-black px-6 py-3 rounded-3xl text-center mt-4"
               >
-                REGISTER NOW
+                Register Now
               </Link>
             </div>
           </motion.div>

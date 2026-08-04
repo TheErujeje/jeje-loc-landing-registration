@@ -39,6 +39,17 @@ export async function getActiveSeason(): Promise<ActiveSeason> {
   return handle<ActiveSeason>(res)
 }
 
+export interface FplEntryLookup {
+  team_name: string
+  player_first_name: string | null
+  player_last_name: string | null
+}
+
+export async function lookupFplEntry(fplEntryId: number): Promise<FplEntryLookup> {
+  const res = await fetch(`${API_BASE_URL}/registration/lookup-entry/${fplEntryId}`)
+  return handle<FplEntryLookup>(res)
+}
+
 export async function registerForLeague(payload: RegisterPayload): Promise<RegisterResponse> {
   const res = await fetch(`${API_BASE_URL}/registration`, {
     method: 'POST',
