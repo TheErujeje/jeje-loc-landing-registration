@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { CheckCircle2, XCircle, Loader2, ArrowRight } from 'lucide-react'
@@ -8,7 +8,16 @@ import { verifyPayment } from '@/lib/api'
 
 const USER_PORTAL_URL = process.env.NEXT_PUBLIC_USER_PORTAL_URL || 'http://localhost:3051'
 
-export default function RegisterSuccessPage() {
+function CheckingState() {
+  return (
+    <div className="min-h-screen pt-40 pb-24 bg-white flex flex-col items-center text-center px-4">
+      <Loader2 className="h-16 w-16 text-brand-lilac animate-spin mb-6" />
+      <h1 className="text-3xl font-bold text-ink-900 tracking-[-0.03em]">Confirming your payment…</h1>
+    </div>
+  )
+}
+
+function RegisterSuccessContent() {
   const params = useSearchParams()
   const reference = params.get('reference') || params.get('trxref')
   const [status, setStatus] = useState<'checking' | 'success' | 'failed'>('checking')
@@ -23,18 +32,14 @@ export default function RegisterSuccessPage() {
       .catch(() => setStatus('failed'))
   }, [reference])
 
+  if (status === 'checking') return <CheckingState />
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="min-h-screen pt-40 pb-24 bg-white flex flex-col items-center text-center px-4"
     >
-      {status === 'checking' && (
-        <>
-          <Loader2 className="h-16 w-16 text-brand-lilac animate-spin mb-6" />
-          <h1 className="text-3xl font-bold text-ink-900 tracking-[-0.03em]">Confirming your payment…</h1>
-        </>
-      )}
       {status === 'success' && (
         <>
           <CheckCircle2 className="h-16 w-16 text-status-success mb-6" />
@@ -64,5 +69,13 @@ export default function RegisterSuccessPage() {
         </>
       )}
     </motion.div>
+  )
+}
+
+export default function RegisterSuccessPage() {
+  return (
+    <Suspense fallback={<CheckingState />}>
+      <RegisterSuccessContent />
+    </Suspense>
   )
 }
