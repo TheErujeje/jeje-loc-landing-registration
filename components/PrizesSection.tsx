@@ -73,7 +73,7 @@ export function PrizesSection() {
               <div className="text-5xl font-semibold text-brand-lilac tracking-tight mb-6">
                 ₦50,000
               </div>
-              <p className="text-sm text-ink-600">+ The Jeje&apos;s League Trophy</p>
+              <p className="text-sm text-ink-600">+ The Jeje&apos;s <span className="font-semibold">League of Champions</span> Trophy</p>
             </div>
           </motion.div>
 

@@ -55,12 +55,12 @@ export function Footer() {
           <Link href="/" className="flex items-center gap-2">
             <Trophy className="h-6 w-6 text-brand-lilac" />
             <span className="font-bold text-lg tracking-[-0.02em] text-white">
-              Jeje&apos;s <span className="text-brand-lilac">League</span>
+              Jeje&apos;s <span className="text-brand-lilac">League of Champions</span>
             </span>
           </Link>
           <div className="text-right max-sm:text-left">
             <p className="text-sm text-white/50">
-              &copy; {new Date().getFullYear()} Jeje&apos;s League of Champions. All rights reserved.
+              &copy; {new Date().getFullYear()} Jeje&apos;s <span className="font-semibold">League of Champions</span>. All rights reserved.
             </p>
             <p className="text-xs text-white/30 mt-1">Not affiliated with the official Premier League.</p>
           </div>

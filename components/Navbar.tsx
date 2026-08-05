@@ -42,7 +42,7 @@ export function Navbar() {
                 overDarkHero ? 'text-white' : 'text-ink-900'
               }`}
             >
-              Jeje&apos;s <span className="text-brand-lilac">League</span>
+              Jeje&apos;s <span className="text-brand-lilac">League of Champions</span>
             </span>
           </Link>
 
