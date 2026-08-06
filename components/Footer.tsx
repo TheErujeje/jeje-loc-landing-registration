@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { Trophy, Twitter, Instagram, Mail } from 'lucide-react'
+import { Twitter, Instagram, Mail } from 'lucide-react'
+import { Logo } from './Logo'
 
 export function Footer() {
   const navigationLinks = [
     { label: 'Home', href: '/' },
-    { label: 'Past Winners', href: '/winners' },
     { label: 'Register Now', href: '/register' },
   ]
 
@@ -53,7 +53,7 @@ export function Footer() {
 
         <div className="flex w-full items-center justify-between max-sm:items-start max-sm:flex-col max-sm:gap-3 border-t border-white/10 pt-6">
           <Link href="/" className="flex items-center gap-2">
-            <Trophy className="h-6 w-6 text-brand-lilac" />
+            <Logo className="h-12 w-12 text-brand-lilac" />
             <span className="font-bold text-lg tracking-[-0.02em] text-white">
               Jeje&apos;s <span className="text-brand-lilac">League of Champions</span>
             </span>

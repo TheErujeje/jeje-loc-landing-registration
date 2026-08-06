@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Trophy } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Logo } from './Logo'
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -24,7 +25,6 @@ export function Navbar() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Past Winners', path: '/winners' },
   ]
 
   return (
@@ -36,7 +36,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <Trophy className={`h-6 w-6 transition-colors ${overDarkHero ? 'text-white' : 'text-brand-lilac'}`} />
+            <Logo className={`h-12 w-12 transition-colors ${overDarkHero ? 'text-white' : 'text-brand-lilac'}`} />
             <span
               className={`font-bold text-xl tracking-[-0.03em] transition-colors ${
                 overDarkHero ? 'text-white' : 'text-ink-900'
