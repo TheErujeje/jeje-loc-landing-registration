@@ -12,7 +12,7 @@ export const NIGERIAN_BANKS: { name: string; code: string }[] = [
   { name: 'Globus Bank', code: '00103' },
   { name: 'Guaranty Trust Bank', code: '058' },
   { name: 'Keystone Bank', code: '082' },
-  { name: 'Kuda Microfinance Bank', code: '50211' },
+  { name: 'Kuda Bank', code: '50211' },
   { name: 'Moniepoint MFB', code: '50515' },
   { name: 'Opay', code: '999992' },
   { name: 'Palmpay', code: '999991' },

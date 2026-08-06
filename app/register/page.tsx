@@ -4,7 +4,15 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ShieldCheck, ArrowRight, Loader2, HelpCircle, CheckCircle2, XCircle } from 'lucide-react'
 import Link from 'next/link'
-import { getActiveSeason, lookupFplEntry, registerForLeague, type ActiveSeason, type FplEntryLookup } from '@/lib/api'
+import {
+  getActiveSeason,
+  lookupFplEntry,
+  registerForLeague,
+  verifyBankAccount,
+  type ActiveSeason,
+  type BankVerification,
+  type FplEntryLookup,
+} from '@/lib/api'
 import { NIGERIAN_BANKS } from '@/lib/banks'
 import { Select } from '@/components/ui/Select'
 
@@ -28,6 +36,11 @@ export default function RegisterPage() {
   const [teamLookup, setTeamLookup] = useState<{ status: 'idle' | 'loading' | 'found' | 'not_found'; entry?: FplEntryLookup }>({
     status: 'idle',
   })
+
+  const [bankLookup, setBankLookup] = useState<{
+    status: 'idle' | 'loading' | 'found' | 'not_found'
+    verification?: BankVerification
+  }>({ status: 'idle' })
 
   useEffect(() => {
     getActiveSeason()
@@ -54,6 +67,26 @@ export default function RegisterPage() {
 
     return () => clearTimeout(timeout)
   }, [formData.fplEntryId])
+
+  // Same idea as the FPL Team ID check above — resolve the bank account to
+  // its real holder name so a typo'd account number gets caught here,
+  // before the user ever pays, instead of being discovered at payout time.
+  useEffect(() => {
+    const { bankAccountNumber, bankCode } = formData
+    if (bankAccountNumber.length !== 10 || !bankCode) {
+      setBankLookup({ status: 'idle' })
+      return
+    }
+
+    setBankLookup({ status: 'loading' })
+    const timeout = setTimeout(() => {
+      verifyBankAccount(bankAccountNumber, bankCode)
+        .then((verification) => setBankLookup({ status: 'found', verification }))
+        .catch(() => setBankLookup({ status: 'not_found' }))
+    }, 500)
+
+    return () => clearTimeout(timeout)
+  }, [formData.bankAccountNumber, formData.bankCode])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -226,7 +259,26 @@ export default function RegisterPage() {
                   value={formData.bankAccountNumber} onChange={handleChange}
                   className={inputClass} placeholder="10-digit NUBAN"
                 />
-                <p className="text-xs text-ink-500 mt-1">This is where your winnings get paid out — automatically.</p>
+                <p className="text-xs text-ink-500 mt-1">
+                  This is the account your prize wins and payouts get sent to — automatically.
+                </p>
+                {bankLookup.status === 'loading' && (
+                  <p className="flex items-center gap-1.5 text-xs text-ink-500 mt-1">
+                    <Loader2 className="h-3 w-3 animate-spin" /> Verifying account…
+                  </p>
+                )}
+                {bankLookup.status === 'found' && bankLookup.verification && (
+                  <p className="flex items-center gap-1.5 text-xs text-status-success mt-1">
+                    <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0" />
+                    {bankLookup.verification.account_name}
+                  </p>
+                )}
+                {bankLookup.status === 'not_found' && (
+                  <p className="flex items-center gap-1.5 text-xs text-status-danger mt-1">
+                    <XCircle className="h-3.5 w-3.5 flex-shrink-0" />
+                    Couldn&apos;t verify this account — double-check the number and bank.
+                  </p>
+                )}
               </Field>
             </div>
 

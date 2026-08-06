@@ -50,6 +50,16 @@ export async function lookupFplEntry(fplEntryId: number): Promise<FplEntryLookup
   return handle<FplEntryLookup>(res)
 }
 
+export interface BankVerification {
+  account_name: string
+}
+
+export async function verifyBankAccount(accountNumber: string, bankCode: string): Promise<BankVerification> {
+  const params = new URLSearchParams({ account_number: accountNumber, bank_code: bankCode })
+  const res = await fetch(`${API_BASE_URL}/registration/verify-bank?${params.toString()}`)
+  return handle<BankVerification>(res)
+}
+
 export async function registerForLeague(payload: RegisterPayload): Promise<RegisterResponse> {
   const res = await fetch(`${API_BASE_URL}/registration`, {
     method: 'POST',
