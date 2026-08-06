@@ -188,11 +188,12 @@ export default function RegisterPage() {
                   <Link
                     href="/help#team-id"
                     target="_blank"
-                    className="text-ink-500 hover:text-brand-purple transition-colors"
+                    className="inline-flex items-center gap-1 text-brand-purple hover:underline underline-offset-2 transition-colors font-semibold text-xs"
                     aria-label="How do I find my FPL Team ID?"
                     title="How do I find my FPL Team ID?"
                   >
-                    <HelpCircle className="h-4 w-4" />
+                    <HelpCircle className="h-4 w-4" strokeWidth={2.5} />
+                    How to get your FPL ID
                   </Link>
                 }
               >
