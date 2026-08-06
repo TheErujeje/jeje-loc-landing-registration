@@ -1,8 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Twitter, Instagram, Mail } from 'lucide-react'
+import { Mail, MessageCircle } from 'lucide-react'
 import { Logo } from './Logo'
+
+const WHATSAPP_COMMUNITY_URL = 'https://chat.whatsapp.com/E6b03FbFqR6CDyEqIIrch4?s=cl&p=i&mlu=4'
 
 export function Footer() {
   const navigationLinks = [
@@ -22,11 +24,15 @@ export function Footer() {
               Compete with the best, win weekly prizes, and secure eternal glory.
             </p>
             <div className="flex items-center gap-5 mt-2">
-              <a href="#" className="text-white/60 hover:text-brand-lilac transition-colors" aria-label="Twitter">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-white/60 hover:text-brand-lilac transition-colors" aria-label="Instagram">
-                <Instagram className="h-5 w-5" />
+              <a
+                href={WHATSAPP_COMMUNITY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-brand-lilac transition-colors"
+                aria-label="Join our WhatsApp community"
+                title="Join our WhatsApp community"
+              >
+                <MessageCircle className="h-5 w-5" />
               </a>
               <a
                 href="mailto:hello@jejesleague.com"
