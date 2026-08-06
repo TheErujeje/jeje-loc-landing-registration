@@ -35,10 +35,10 @@ export function Footer() {
                 <MessageCircle className="h-5 w-5" />
               </a>
               <a
-                href="mailto:hello@jejesleague.com"
+                href="mailto:ucheohanado@gmail.com"
                 className="flex items-center gap-2 text-white/60 hover:text-brand-lilac transition-colors text-sm"
               >
-                <Mail className="h-4 w-4" /> hello@jejesleague.com
+                <Mail className="h-4 w-4" /> ucheohanado@gmail.com
               </a>
             </div>
           </div>
