@@ -16,6 +16,11 @@ import {
 import { NIGERIAN_BANKS } from '@/lib/banks'
 import { Select } from '@/components/ui/Select'
 
+// Deliberately simple (not RFC 5322-complete) — this is a fast "does this
+// look like an email" check to catch typos before the user pays, not a
+// substitute for the backend's real EmailStr validation.
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 export default function RegisterPage() {
   const [season, setSeason] = useState<ActiveSeason | null>(null)
   const [seasonError, setSeasonError] = useState<string | null>(null)
@@ -41,6 +46,9 @@ export default function RegisterPage() {
     status: 'idle' | 'loading' | 'found' | 'not_found'
     verification?: BankVerification
   }>({ status: 'idle' })
+
+  const [emailTouched, setEmailTouched] = useState(false)
+  const emailValid = EMAIL_PATTERN.test(formData.email)
 
   useEffect(() => {
     getActiveSeason()
@@ -164,8 +172,15 @@ export default function RegisterPage() {
               <Field label="Email Address">
                 <input
                   type="email" name="email" required value={formData.email} onChange={handleChange}
+                  onBlur={() => setEmailTouched(true)}
                   className={inputClass} placeholder="manager@example.com"
                 />
+                {emailTouched && formData.email.length > 0 && !emailValid && (
+                  <p className="flex items-center gap-1.5 text-xs text-status-danger mt-1">
+                    <XCircle className="h-3.5 w-3.5 flex-shrink-0" />
+                    Enter a valid email address.
+                  </p>
+                )}
               </Field>
 
               <Field label="Password">
@@ -296,7 +311,7 @@ export default function RegisterPage() {
 
               <button
                 type="submit"
-                disabled={submitting || !season}
+                disabled={submitting || !season || !emailValid}
                 className="w-full flex items-center justify-center gap-2 bg-brand-lilac hover:bg-brand-purple disabled:opacity-50 disabled:cursor-not-allowed text-black hover:text-white font-bold tracking-[-0.02em] text-base sm:text-lg py-3 sm:py-4 rounded-3xl transition-colors"
               >
                 {submitting ? (
