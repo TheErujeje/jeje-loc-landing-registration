@@ -91,8 +91,8 @@ export default function HelpPage() {
             <CheckCircle2 className="h-5 w-5 text-brand-lilac flex-shrink-0 mt-0.5" />
             <p className="text-ink-600 text-sm">
               Still stuck? Email us at{' '}
-              <a href="mailto:hello@jejesleague.com" className="text-brand-purple hover:underline">
-                hello@jejesleague.com
+              <a href="mailto:fpl.jejefootball@gmail.com" className="text-brand-purple hover:underline">
+                fpl.jejefootball@gmail.com
               </a>{' '}
               and we&apos;ll help you find it.
             </p>

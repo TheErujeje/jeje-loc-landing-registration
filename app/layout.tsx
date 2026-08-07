@@ -7,8 +7,19 @@ import { Footer } from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jejefootball.com'),
   title: "Jeje's League of Champions",
   description: 'The Ultimate Fantasy Premier League Battleground',
+  openGraph: {
+    title: "Jeje's League of Champions",
+    description: 'The Ultimate Fantasy Premier League Battleground',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Jeje's League of Champions",
+    description: 'The Ultimate Fantasy Premier League Battleground',
+  },
 }
 
 export default function RootLayout({
