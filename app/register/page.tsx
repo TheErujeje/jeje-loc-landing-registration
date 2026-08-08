@@ -186,7 +186,7 @@ export default function RegisterPage() {
                 ) : (
                   <>
                     <ShieldCheck className="h-5 w-5" />
-                    PAY ₦{entryFeeNaira} WITH PAYSTACK
+                    PAY ₦{entryFeeNaira} 
                     <ArrowRight className="h-5 w-5 ml-2" />
                   </>
                 )}
