@@ -31,7 +31,7 @@ export default function HelpPage() {
             </h2>
             <p className="text-ink-600 text-sm leading-relaxed mb-6">
               Your Team ID (also called your Entry ID) is the number FPL uses to identify your team. It&apos;s
-              what we use to pull your team name, points, and gameweek history — not your email or username.
+              what we use to pull your team name, points, and gameweek history.
             </p>
 
             <ol className="space-y-4">
